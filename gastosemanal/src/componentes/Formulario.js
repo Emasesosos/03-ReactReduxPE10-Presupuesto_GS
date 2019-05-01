@@ -8,19 +8,21 @@ class FormularioGasto extends Component {
 
     crearGasto = (e) => {
 
-        // Prevenir el default
+        // ***** Prevenir el default
         e.preventDefault();
-        // Crear el objeto con los datos
+
+        // ***** Crear el objeto con los datos
         const gasto = {
             nombreGasto: this.nombreGasto.current.value,
             cantidadGasto: this.cantidadGasto.current.value
         }
-        console.log(gasto);
-        // Agregarlo y enviarlo por props
+        // console.log(gasto);
+        
+        // ***** Agregarlo y enviarlo por props
         this.props.agregarGasto(gasto);
 
-        // Resetear el formulario (opcional)
-        e.currentTarget.reset();
+        // ***** Resetear el formulario (opcional)
+        // e.currentTarget.reset();
 
     }
 
