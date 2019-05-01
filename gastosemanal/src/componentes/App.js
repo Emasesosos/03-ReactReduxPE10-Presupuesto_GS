@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Formulario from './Formulario';
 import Listado from './Listado';
-import { validarPresupuesto, revisarPresupuesto } from './../Helper';
+import { validarPresupuesto } from './../Helper';
+import ControlPresupuesto from './ControlPresupuesto';
 import Imagen from './Imagen';
 import './../css/App.css';
 
@@ -52,12 +53,34 @@ class App extends Component {
     // ***** Agregar al gasto el objeto del state
     gastos[`gasto${Date.now()}`] = gasto;
     // console.log(gastos);
+    // console.log(gasto);
+    this.restarPresupuesto(gasto.cantidadGasto);
 
     // ***** Ponerlo en state
     this.setState({
       gastos
     })
 
+  }
+
+  // Restar del presupuesto cuando un gasto se crea
+  restarPresupuesto = cantidad => {
+    // ***** Leer el gasto
+    // console.log(typeof cantidad);
+    let restar = Number(cantidad);
+
+    // ***** Tomar una copia del state actual
+    let restante = this.state.restante;
+
+    // ***** Lo restamos
+    restante -= restar;
+    console.log(restante);
+    restante = String(restante);
+    // ***** Agregamos el nuevo state
+    this.setState({
+      restante,
+      //restante: restante,
+    })
   }
 
   render() {
@@ -78,6 +101,10 @@ class App extends Component {
               <Listado
                         gastos={this.state.gastos}
               ></Listado>
+              <ControlPresupuesto
+                                  presupuesto={this.state.presupuesto}
+                                  restante={this.state.restante}
+              ></ControlPresupuesto>
             </div>
           </div>
         </div>
